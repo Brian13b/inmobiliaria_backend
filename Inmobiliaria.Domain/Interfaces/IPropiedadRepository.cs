@@ -6,6 +6,7 @@ namespace Inmobiliaria.Domain.Interfaces
     {
         Task<List<Propiedad>> GetAllAsync();
         Task<Propiedad?> GetByIdAsync(int id);
+        Task<IEnumerable<Propiedad>> GetActivasAsync();
 
         Task<Propiedad> AddAsync(Propiedad propiedad);
         Task UpdateAsync(Propiedad propiedad);

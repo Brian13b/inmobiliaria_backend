@@ -16,7 +16,6 @@ namespace Inmobiliaria.Infrastructure.Repositories
 
         public async Task<List<Propiedad>> GetAllAsync()
         {
-            // Incluimos las imágenes al traer la propiedad
             return await _context.Propiedades
                                  .Include(p => p.Imagenes)
                                  .ToListAsync();
@@ -27,6 +26,14 @@ namespace Inmobiliaria.Infrastructure.Repositories
             return await _context.Propiedades
                                  .Include(p => p.Imagenes)
                                  .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<IEnumerable<Propiedad>> GetActivasAsync()
+        {
+            return await _context.Propiedades
+                                 .Where(p => p.Activa == true)
+                                 .OrderByDescending(p => p.FechaCreacion)
+                                 .ToListAsync();
         }
 
         public async Task<Propiedad> AddAsync(Propiedad propiedad)

@@ -1,8 +1,9 @@
 ﻿using Inmobiliaria.API.DTOs;
 using Inmobiliaria.Domain.Entities;
 using Inmobiliaria.Domain.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Inmobiliaria.API.Controller
 {
@@ -32,6 +33,14 @@ namespace Inmobiliaria.API.Controller
             if (propiedad == null) return NotFound("Propiedad no encontrada");
 
             return Ok(propiedad);
+        }
+
+        [HttpGet("activas")]
+        public async Task<ActionResult<IEnumerable<Propiedad>>> GetPropiedadesActivas()
+        {
+            var activas = await _repository.GetActivasAsync();
+
+            return Ok(activas);
         }
 
         [HttpPost]
