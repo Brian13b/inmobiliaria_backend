@@ -62,8 +62,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.UseCors("NuevaPolitica");
 
 app.UseStaticFiles();
@@ -78,5 +76,9 @@ using (var scope = app.Services.CreateScope())
     
     await DbSeeder.SeedAsync(context);
 }
+
+app.MapGet("/", () => "La Inmobiliaria API está corriendo");
+
+app.MapGet("/health", () => Results.Ok("Healthy"));
 
 app.Run();
