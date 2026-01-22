@@ -1,0 +1,25 @@
+# Archivos compilados (Binarios)
+[Bb]in/
+[Oo]bj/
+
+# Configuración de Usuario de Visual Studio
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+# Archivos de entorno y secretos
+# IMPORTANTE: appsettings.Development.json suele tener claves locales
+appsettings.Development.json
+# Si tu appsettings.json tiene la clave real de Supabase, DESCOMENTÁ la siguiente linea:
+# appsettings.json
+
+# Bases de datos locales
+*.db
+*.sqlite
+*.mdf
+*.ldf
+
+# Logs
+*.log
