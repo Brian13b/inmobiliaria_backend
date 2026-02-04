@@ -3,6 +3,7 @@ using Inmobiliaria.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Inmobiliaria.Domain.Interfaces;
 
 namespace Inmobiliaria.API.Controllers
 {
@@ -11,10 +12,25 @@ namespace Inmobiliaria.API.Controllers
     public class ConfiguracionController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IFotoService _fotoService;
 
-        public ConfiguracionController(ApplicationDbContext context)
+        public ConfiguracionController(ApplicationDbContext context, IFotoService fotoService)
         {
             _context = context;
+            _fotoService = fotoService;
+        }
+
+        [HttpPost("UploadImage")]
+        [Authorize]
+        public async Task<IActionResult> UploadImage(IFormFile image)
+        {
+            if (image == null) return BadRequest("No se recibió ninguna imagen");
+
+            var url = await _fotoService.SubirFotoAsync(image, true);
+
+            if (string.IsNullOrEmpty(url)) return BadRequest("Error al subir a Cloudinary");
+
+            return Ok(new { url });
         }
 
         [HttpGet]
