@@ -53,21 +53,32 @@ namespace Inmobiliaria.API.Controller
                 Descripcion = dto.Descripcion,
                 Precio = dto.Precio,
                 Moneda = dto.Moneda,
+                PrecioExpensas = dto.PrecioExpensas,
                 Direccion = dto.Direccion,
+                Barrio = dto.Barrio, 
+                Ciudad = dto.Ciudad,
                 Ambientes = dto.Ambientes,
                 Dormitorios = dto.Dormitorios,
                 Baños = dto.Baños,
                 Cocheras = dto.Cocheras,
                 SuperficieTotal = dto.SuperficieTotal,
                 SuperficieCubierta = dto.SuperficieCubierta,
+                Antiguedad = dto.Antiguedad,
                 Tipo = dto.Tipo,
                 FechaCreacion = DateTime.UtcNow,
-                Activa = true,
-                EstadoOperacion = "Venta"
+                Activa = dto.Activa,
+                EsDestacada = dto.EsDestacada,
+                EstadoOperacion = dto.EstadoOperacion,
+
+                TieneAgua = dto.TieneAgua,
+                TieneGas = dto.TieneGas,
+                TieneLuz = dto.TieneLuz,
+                TieneInternet = dto.TieneInternet,
+                TieneCloacas = dto.TieneCloacas,
+                TienePavimento = dto.TienePavimento
             };
 
             await _repository.AddAsync(nuevaPropiedad);
-
             return Ok(new { mensaje = "Propiedad creada con éxito", id = nuevaPropiedad.Id });
         }
 
@@ -106,19 +117,30 @@ namespace Inmobiliaria.API.Controller
             propiedad.Descripcion = dto.Descripcion;
             propiedad.Precio = dto.Precio;
             propiedad.Moneda = dto.Moneda;
+            propiedad.PrecioExpensas = dto.PrecioExpensas;
             propiedad.Ambientes = dto.Ambientes;
             propiedad.Dormitorios = dto.Dormitorios;
             propiedad.Baños = dto.Baños;
             propiedad.Cocheras = dto.Cocheras;
             propiedad.SuperficieTotal = dto.SuperficieTotal;
+            propiedad.SuperficieCubierta = dto.SuperficieCubierta; 
+            propiedad.Antiguedad = dto.Antiguedad;
             propiedad.Direccion = dto.Direccion;
+            propiedad.Barrio = dto.Barrio;
             propiedad.Ciudad = dto.Ciudad;
             propiedad.Tipo = dto.Tipo;
             propiedad.EstadoOperacion = dto.EstadoOperacion;
             propiedad.Activa = dto.Activa;
             propiedad.EsDestacada = dto.EsDestacada;
 
-            await _repository.UpdateAsync(propiedad); 
+            propiedad.TieneAgua = dto.TieneAgua;
+            propiedad.TieneGas = dto.TieneGas;
+            propiedad.TieneLuz = dto.TieneLuz;
+            propiedad.TieneInternet = dto.TieneInternet;
+            propiedad.TieneCloacas = dto.TieneCloacas;
+            propiedad.TienePavimento = dto.TienePavimento;
+
+            await _repository.UpdateAsync(propiedad);
             return NoContent();
         }
 
@@ -129,8 +151,6 @@ namespace Inmobiliaria.API.Controller
             var propiedad = await _repository.GetByIdAsync(id);
             if (propiedad == null) return NotFound();
 
-            // Acá deberías borrar también las fotos de Cloudinary si querés ser prolijo
-            // Por ahora borramos de la BD
             await _repository.DeleteAsync(id);
             return NoContent();
         }
