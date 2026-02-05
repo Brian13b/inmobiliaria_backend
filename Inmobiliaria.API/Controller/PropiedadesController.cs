@@ -55,7 +55,7 @@ namespace Inmobiliaria.API.Controller
                 Moneda = dto.Moneda,
                 PrecioExpensas = dto.PrecioExpensas,
                 Direccion = dto.Direccion,
-                Barrio = dto.Barrio, 
+                Barrio = dto.Barrio,
                 Ciudad = dto.Ciudad,
                 Ambientes = dto.Ambientes,
                 Dormitorios = dto.Dormitorios,
@@ -65,17 +65,37 @@ namespace Inmobiliaria.API.Controller
                 SuperficieCubierta = dto.SuperficieCubierta,
                 Antiguedad = dto.Antiguedad,
                 Tipo = dto.Tipo,
+                Estado = dto.Estado,
+                Orientacion = dto.Orientacion,
+                Disposicion = dto.Disposicion,
                 FechaCreacion = DateTime.UtcNow,
                 Activa = dto.Activa,
                 EsDestacada = dto.EsDestacada,
                 EstadoOperacion = dto.EstadoOperacion,
 
+                // Servicios
                 TieneAgua = dto.TieneAgua,
-                TieneGas = dto.TieneGas,
+                TieneGasNatural = dto.TieneGasNatural,
+                TieneGasEnvasado = dto.TieneGasEnvasado,
                 TieneLuz = dto.TieneLuz,
                 TieneInternet = dto.TieneInternet,
                 TieneCloacas = dto.TieneCloacas,
-                TienePavimento = dto.TienePavimento
+                TienePavimento = dto.TienePavimento,
+                TieneCalefon = dto.TieneCalefon,
+                TieneAscensor = dto.TieneAscensor,
+                TieneTelefono = dto.TieneTelefono,
+                TieneSeguridad = dto.TieneSeguridad,
+
+                // Comodidades
+                TienePatio = dto.TienePatio,
+                TienePatioSeco = dto.TienePatioSeco,
+                TieneBalcon = dto.TieneBalcon,
+                TieneCocina = dto.TieneCocina,
+                TieneCocinaComedor = dto.TieneCocinaComedor,
+                TieneLiving = dto.TieneLiving,
+                TieneLivingComedor = dto.TieneLivingComedor,
+                TieneLavadero = dto.TieneLavadero,
+                TieneLavaderoSectorizado = dto.TieneLavaderoSectorizado
             };
 
             await _repository.AddAsync(nuevaPropiedad);
@@ -113,32 +133,53 @@ namespace Inmobiliaria.API.Controller
             var propiedad = await _repository.GetByIdAsync(id);
             if (propiedad == null) return NotFound("Propiedad no encontrada");
 
+            // Datos Básicos
             propiedad.Titulo = dto.Titulo;
             propiedad.Descripcion = dto.Descripcion;
             propiedad.Precio = dto.Precio;
             propiedad.Moneda = dto.Moneda;
             propiedad.PrecioExpensas = dto.PrecioExpensas;
+            propiedad.Direccion = dto.Direccion;
+            propiedad.Barrio = dto.Barrio;
+            propiedad.Ciudad = dto.Ciudad;
             propiedad.Ambientes = dto.Ambientes;
             propiedad.Dormitorios = dto.Dormitorios;
             propiedad.Baños = dto.Baños;
             propiedad.Cocheras = dto.Cocheras;
-            propiedad.SuperficieTotal = dto.SuperficieTotal;
-            propiedad.SuperficieCubierta = dto.SuperficieCubierta; 
             propiedad.Antiguedad = dto.Antiguedad;
-            propiedad.Direccion = dto.Direccion;
-            propiedad.Barrio = dto.Barrio;
-            propiedad.Ciudad = dto.Ciudad;
+            propiedad.SuperficieTotal = dto.SuperficieTotal;
+            propiedad.SuperficieCubierta = dto.SuperficieCubierta;
             propiedad.Tipo = dto.Tipo;
+            propiedad.Estado = dto.Estado;
+            propiedad.Orientacion = dto.Orientacion;
+            propiedad.Disposicion = dto.Disposicion;
             propiedad.EstadoOperacion = dto.EstadoOperacion;
             propiedad.Activa = dto.Activa;
             propiedad.EsDestacada = dto.EsDestacada;
 
+            // Servicios
             propiedad.TieneAgua = dto.TieneAgua;
-            propiedad.TieneGas = dto.TieneGas;
+            propiedad.TieneGasNatural = dto.TieneGasNatural;
+            propiedad.TieneGasEnvasado = dto.TieneGasEnvasado;
             propiedad.TieneLuz = dto.TieneLuz;
             propiedad.TieneInternet = dto.TieneInternet;
             propiedad.TieneCloacas = dto.TieneCloacas;
             propiedad.TienePavimento = dto.TienePavimento;
+            propiedad.TieneCalefon = dto.TieneCalefon;
+            propiedad.TieneAscensor = dto.TieneAscensor;
+            propiedad.TieneTelefono = dto.TieneTelefono;
+            propiedad.TieneSeguridad = dto.TieneSeguridad;
+
+            // Comodidades
+            propiedad.TienePatio = dto.TienePatio;
+            propiedad.TienePatioSeco = dto.TienePatioSeco;
+            propiedad.TieneBalcon = dto.TieneBalcon;
+            propiedad.TieneCocina = dto.TieneCocina;
+            propiedad.TieneCocinaComedor = dto.TieneCocinaComedor;
+            propiedad.TieneLiving = dto.TieneLiving;
+            propiedad.TieneLivingComedor = dto.TieneLivingComedor;
+            propiedad.TieneLavadero = dto.TieneLavadero;
+            propiedad.TieneLavaderoSectorizado = dto.TieneLavaderoSectorizado;
 
             await _repository.UpdateAsync(propiedad);
             return NoContent();
