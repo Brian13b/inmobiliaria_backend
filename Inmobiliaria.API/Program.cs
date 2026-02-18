@@ -70,15 +70,22 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    
-    await DbSeeder.SeedAsync(context);
-}
-
 app.MapGet("/", () => "La Inmobiliaria API está corriendo");
 
 app.MapGet("/health", () => Results.Ok("Healthy"));
+
+_ = Task.Run(async () =>
+{
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    try
+    {
+        await DbSeeder.SeedAsync(context);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error en el Seeder: {ex.Message}");
+    }
+});
 
 app.Run();
