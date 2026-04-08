@@ -1,8 +1,10 @@
 ﻿using Inmobiliaria.API.DTOs;
 using Inmobiliaria.Domain.Entities;
 using Inmobiliaria.Domain.Interfaces;
+using Inmobiliaria.Domain.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Logging;
 
 
 namespace Inmobiliaria.API.Controller
@@ -25,10 +27,19 @@ namespace Inmobiliaria.API.Controller
             return Ok(propiedades);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("{idOrSlug}")]
+        public async Task<IActionResult> GetByIdOrSlug(string idOrSlug)
         {
-            var propiedad = await _repository.GetByIdAsync(id);
+            Propiedad? propiedad = null;
+
+            if (int.TryParse(idOrSlug, out int id))
+            {
+                propiedad = await _repository.GetByIdAsync(id);
+            }
+            else
+            {
+                propiedad = await _repository.GetBySlugAsync(idOrSlug);
+            }
 
             if (propiedad == null) return NotFound("Propiedad no encontrada");
 
@@ -107,7 +118,11 @@ namespace Inmobiliaria.API.Controller
             };
 
             await _repository.AddAsync(nuevaPropiedad);
-            return Ok(new { mensaje = "Propiedad creada con éxito", id = nuevaPropiedad.Id });
+
+            nuevaPropiedad.Slug = SlugHelper.GenerateSlug(nuevaPropiedad.Titulo, nuevaPropiedad.Id);
+            await _repository.UpdateAsync(nuevaPropiedad);
+
+            return Ok(new { mensaje = "Propiedad creada con éxito", id = nuevaPropiedad.Id, slug = nuevaPropiedad.Slug });
         }
 
         [HttpPost("{id}/imagenes")]
@@ -166,6 +181,7 @@ namespace Inmobiliaria.API.Controller
             propiedad.EstadoOperacion = dto.EstadoOperacion;
             propiedad.Activa = dto.Activa;
             propiedad.EsDestacada = dto.EsDestacada;
+            propiedad.Slug = SlugHelper.GenerateSlug(propiedad.Titulo, propiedad.Id);   
 
             // Servicios
             propiedad.TieneAgua = dto.TieneAgua;

@@ -38,6 +38,7 @@
         public bool EsDestacada { get; set; } = false;
         public string EstadoOperacion { get; set; } = "Venta";
         public DateTime FechaCreacion { get; set; } = DateTime.UtcNow;
+        public string Slug { get; set; } = string.Empty;
 
         public List<ImagenPropiedad> Imagenes { get; set; } = new List<ImagenPropiedad>();
 

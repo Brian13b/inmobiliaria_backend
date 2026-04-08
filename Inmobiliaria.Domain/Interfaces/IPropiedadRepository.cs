@@ -14,6 +14,7 @@ namespace Inmobiliaria.Domain.Interfaces
 
         Task AddImagenAsync(ImagenPropiedad imagen);
         Task DeleteImagenAsync(int imagenId);
-        
+
+        Task<Propiedad?> GetBySlugAsync(string slug);
     }
 }

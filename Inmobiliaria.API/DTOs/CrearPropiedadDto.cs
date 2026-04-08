@@ -23,6 +23,7 @@ namespace Inmobiliaria.API.DTOs
         public string EstadoOperacion { get; set; } = "Venta";
         public bool Activa { get; set; } = true;
         public bool EsDestacada { get; set; } = false;
+        public string Slug { get; set; } = string.Empty;
         public EstadoInmueble? Estado { get; set; }
         public Orientacion? Orientacion { get; set; }
         public Disposicion? Disposicion { get; set; }

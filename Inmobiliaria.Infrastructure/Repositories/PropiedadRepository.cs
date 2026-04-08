@@ -76,5 +76,12 @@ namespace Inmobiliaria.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<Propiedad?> GetBySlugAsync(string slug)
+        {
+            return await _context.Propiedades
+                                 .Include(p => p.Imagenes.OrderBy(i => i.Orden))
+                                 .FirstOrDefaultAsync(p => p.Slug == slug);
+        }
     }
 }
