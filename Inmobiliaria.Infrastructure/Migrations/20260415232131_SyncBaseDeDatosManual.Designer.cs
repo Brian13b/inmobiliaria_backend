@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Inmobiliaria.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260408122555_AddSlugToPropiedades")]
-    partial class AddSlugToPropiedades
+    [Migration("20260415232131_SyncBaseDeDatosManual")]
+    partial class SyncBaseDeDatosManual
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -195,6 +195,12 @@ namespace Inmobiliaria.Infrastructure.Migrations
 
                     b.Property<int?>("Orientacion")
                         .HasColumnType("integer");
+
+                    b.Property<bool>("PagaExpensas")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("PagaTasas")
+                        .HasColumnType("boolean");
 
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");

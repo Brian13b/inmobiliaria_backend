@@ -5,24 +5,22 @@
 namespace Inmobiliaria.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddSlugToPropiedades : Migration
+    public partial class SyncBaseDeDatosManual : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Slug",
-                table: "Propiedades",
-                type: "text",
-                nullable: false,
-                defaultValue: "");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Slug",
+                name: "PagaExpensas",
+                table: "Propiedades");
+
+            migrationBuilder.DropColumn(
+                name: "PagaTasas",
                 table: "Propiedades");
         }
     }

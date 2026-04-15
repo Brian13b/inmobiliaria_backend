@@ -13,6 +13,8 @@
         public decimal Precio { get; set; }
         public string Moneda { get; set; } = "ARS";
         public decimal? PrecioExpensas { get; set; }
+        public bool PagaExpensas { get; set; } = false;
+        public bool PagaTasas { get; set; } = false;
 
         public string Direccion { get; set; } = string.Empty;
         public string Barrio { get; set; } = string.Empty;

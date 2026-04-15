@@ -9,6 +9,8 @@ namespace Inmobiliaria.API.DTOs
         public decimal Precio { get; set; }
         public string Moneda { get; set; } = "ARS";
         public decimal PrecioExpensas { get; set; }
+        public bool PagaExpensas { get; set; }
+        public bool PagaTasas { get; set; }
         public string Direccion { get; set; } = string.Empty;
         public string Barrio { get; set; } = string.Empty;
         public string Ciudad { get; set; } = "Paraná";

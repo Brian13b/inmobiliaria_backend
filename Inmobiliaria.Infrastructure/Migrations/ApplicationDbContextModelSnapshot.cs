@@ -193,6 +193,12 @@ namespace Inmobiliaria.Infrastructure.Migrations
                     b.Property<int?>("Orientacion")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("PagaExpensas")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("PagaTasas")
+                        .HasColumnType("boolean");
+
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
 

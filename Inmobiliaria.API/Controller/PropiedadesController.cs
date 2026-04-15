@@ -65,6 +65,8 @@ namespace Inmobiliaria.API.Controller
                 Precio = dto.Precio,
                 Moneda = dto.Moneda,
                 PrecioExpensas = dto.PrecioExpensas,
+                PagaExpensas = dto.PagaExpensas,
+                PagaTasas = dto.PagaTasas,
                 Direccion = dto.Direccion,
                 Barrio = dto.Barrio,
                 Ciudad = dto.Ciudad,
@@ -164,6 +166,8 @@ namespace Inmobiliaria.API.Controller
             propiedad.Precio = dto.Precio;
             propiedad.Moneda = dto.Moneda;
             propiedad.PrecioExpensas = dto.PrecioExpensas;
+            propiedad.PagaExpensas = dto.PagaExpensas;
+            propiedad.PagaTasas = dto.PagaTasas;
             propiedad.Direccion = dto.Direccion;
             propiedad.Barrio = dto.Barrio;
             propiedad.Ciudad = dto.Ciudad;
